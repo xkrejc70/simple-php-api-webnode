@@ -1,6 +1,6 @@
 <?php
 
-use App\Controller\UserController;
+use App\Controller\OrderController;
 use Dotenv\Dotenv;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -16,7 +16,7 @@ $app->addRoutingMiddleware();
 // log error details
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
-$app->get('/order/{id}', [UserController::class, 'getOrderById']);
+$app->get('/order/{id}', [OrderController::class, 'getOrderById']);
 
 // Define app routes
 $app->get('/hello/{name}', function (Request $request, Response $response, $args) {

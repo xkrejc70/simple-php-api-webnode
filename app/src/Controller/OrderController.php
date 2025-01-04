@@ -2,24 +2,20 @@
 
 namespace App\Controller;
 
-use App\Repository\UserRepository;
+use App\Repository\OrderRepository;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class UserController {
-    private UserRepository $userRepository;
+class OrderController {
+    private OrderRepository $orderRepository;
 
     public function __construct() {
-        $this->userRepository = new UserRepository();
-    }
-
-    public static function getThis(): string {
-        return "here I am";
+        $this->orderRepository = new OrderRepository();
     }
 
     public function getOrderById(Request $request, Response $response, array $args): Response {
         $id = $args['id'];
-        $order = $this->userRepository->findById($id);
+        $order = $this->orderRepository->findById($id);
 
         if (!$order) {
             $response->getBody()->write(json_encode(['error' => 'Order not found']));
