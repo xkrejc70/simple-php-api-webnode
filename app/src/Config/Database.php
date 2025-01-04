@@ -24,6 +24,7 @@ class Database {
                 );
                 self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
+                // TODO: Replace with except or error log
                 die('Database connection failed: ' . $e->getMessage());
             }
         }

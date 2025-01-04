@@ -10,6 +10,7 @@ class OrderController {
     private OrderRepository $orderRepository;
 
     public function __construct() {
+        // TODO: DI
         $this->orderRepository = new OrderRepository();
     }
 

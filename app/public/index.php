@@ -13,9 +13,9 @@ $dotenv->load();
 
 $app = AppFactory::create();
 $app->addRoutingMiddleware();
-// log error details
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
+// TODO: move to sep api class
 $app->get('/order/{id}', [OrderController::class, 'getOrderById']);
 
 // Define app routes
