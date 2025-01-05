@@ -33,11 +33,23 @@ class Order {
     public string $status;
 
     /**
-     * @ORM\OneToMany(targetEntity="OrderItem", mappedBy="order", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="OrderItem", mappedBy="order", cascade={"persist", "remove"}, fetch="EAGER")
      */
     public Collection $items;
 
     public function __construct() {
         $this->items = new ArrayCollection();
+    }
+
+    public function toArray(): array {
+        return [
+            'id' => $this->id,
+            'creationDate' => $this->creationDate->format('Y-m-d H:i:s'),
+            'name' => $this->name,
+            'amount' => $this->amount,
+            'currency' => $this->currency,
+            'status' => $this->status,
+            'items' => $this->items->map(fn(OrderItem $item) => $item->toArray())->toArray(),
+        ];
     }
 }

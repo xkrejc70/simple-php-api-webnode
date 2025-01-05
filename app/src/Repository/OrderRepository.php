@@ -14,7 +14,7 @@ class OrderRepository {
     }
     
     public function findById(string $id): ?Order {
-        return $this->entityManager->find(Order::class, $id);
-    }
+        return $this->entityManager->getRepository(Order::class)->find($id);
+    }    
 
 }

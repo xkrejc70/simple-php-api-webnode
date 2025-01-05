@@ -27,4 +27,13 @@ class OrderItem {
      * @ORM\JoinColumn(name="order_id", referencedColumnName="id", onDelete="CASCADE")
      */
     public Order $order;
+
+    public function toArray(): array {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'amount' => $this->amount,
+        ];
+    }
+
 }

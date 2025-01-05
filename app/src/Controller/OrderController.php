@@ -23,7 +23,7 @@ class OrderController {
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
         }
 
-        $response->getBody()->write(json_encode($order));
+        $response->getBody()->write(json_encode($order->toArray()));
         return $response->withHeader('Content-Type', 'application/json');
     }
 }
