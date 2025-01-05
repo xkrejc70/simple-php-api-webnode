@@ -34,6 +34,6 @@ $app->addRoutingMiddleware();
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 // Routes
-(require __DIR__ . '/../src/Routes/api.php')($app);
+(require __DIR__ . '/../src/Routes/Api.php')($app);
 
 $app->run();

@@ -4,8 +4,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - ./app:/var/www/html
     ports:
       - "8000:8000"
     # TODO: Move to .env
