@@ -7,11 +7,11 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class OrderController {
+    
     private OrderRepository $orderRepository;
 
-    public function __construct() {
-        // TODO: DI
-        $this->orderRepository = new OrderRepository();
+    public function __construct(OrderRepository $orderRepository) {
+        $this->orderRepository = $orderRepository;
     }
 
     public function getOrderById(Request $request, Response $response, array $args): Response {

@@ -8,11 +8,15 @@ use App\Entity\OrderItem;
 use PDO;
 
 class OrderRepository {
+
+    private PDO $connection;
+
+    public function __construct(Database $database) {
+        $this->connection = $database->getConnection();
+    }
     
     public function findById(string $id): ?Order {
-        $pdo = Database::getConnection();
-
-        $stmt = $pdo->prepare('SELECT * FROM `order` WHERE id = :id');
+        $stmt = $this->connection->prepare('SELECT * FROM `order` WHERE id = :id');
         $stmt->execute(['id' => $id]);
         $orderData = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -28,7 +32,7 @@ class OrderRepository {
         $order->currency = $orderData['currency'];
         $order->status = $orderData['status'];
 
-        $stmt = $pdo->prepare('SELECT * FROM `order_items` WHERE order_id = :id');
+        $stmt = $this->connection->prepare('SELECT * FROM `order_items` WHERE order_id = :id');
         $stmt->execute(['id' => $id]);
         $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
