@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Order;
 use Doctrine\ORM\EntityManager;
-use PDO;
 
 class OrderRepository {
 
