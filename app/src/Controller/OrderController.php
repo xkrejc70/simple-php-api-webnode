@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\OrderRepository;
+use App\Routes\JsonResponseFormatter;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -19,11 +20,13 @@ class OrderController {
         $order = $this->orderRepository->findById($id);
 
         if (!$order) {
-            $response->getBody()->write(json_encode(['error' => 'Order not found']));
+            $responseData = JsonResponseFormatter::error('Order not found', 404);
+            $response->getBody()->write(json_encode($responseData));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
         }
 
-        $response->getBody()->write(json_encode($order->toArray()));
+        $responseData = JsonResponseFormatter::success($order->toArray());
+        $response->getBody()->write(json_encode($responseData));
         return $response->withHeader('Content-Type', 'application/json');
     }
 }
