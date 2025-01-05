@@ -2,6 +2,7 @@
 
 use App\Config\Database;
 use DI\ContainerBuilder;
+use Doctrine\ORM\EntityManager;
 use Dotenv\Dotenv;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -16,17 +17,9 @@ $dotenv->load();
 // DI
 $containerBuilder = new ContainerBuilder();
 $containerBuilder->addDefinitions([
-    Database::class => function () {
-        return new Database(
-            $_ENV['DB_HOST'],
-            $_ENV['DB_PORT'],
-            $_ENV['DB_DATABASE'],
-            $_ENV['DB_USERNAME'],
-            $_ENV['DB_PASSWORD']
-        );
-    },
+    EntityManager::class => require __DIR__ . '/../src/Config/Doctrine.php',
     OrderRepository::class => function ($c) {
-        return new OrderRepository($c->get(Database::class));
+        return new OrderRepository($c->get(EntityManager::class));
     },
     OrderController::class => function ($c) {
         return new OrderController($c->get(OrderRepository::class));
