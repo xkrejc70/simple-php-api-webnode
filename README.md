@@ -20,7 +20,7 @@ docker-compose up --build
 ```
 
 ### Access the API:
-`http://localhost:8000/order/{id}`
+`http://localhost:8000/order/1`
 
 ## Run Tests
 ```
